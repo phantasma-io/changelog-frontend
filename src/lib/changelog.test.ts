@@ -24,7 +24,7 @@ describe("changelog content loader", () => {
     // Optional callout text should be available separately from the markdown body.
     const entries = await getAllChangelogEntries();
 
-    expect(entries[0]?.notice).toBe("The network has been rolled back to the March 16 state at block #6502683.");
+    expect(entries[0]?.notice).toBe("Devnet network has been rolled back to the March 16 state at block #6502683.");
     expect(entries[1]?.notice).toBeUndefined();
   });
 

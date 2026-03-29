@@ -16,6 +16,12 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Phantasma Network Changelog",
   description: "Release notes, rollout notes, and network updates for the Phantasma ecosystem.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -35,4 +41,3 @@ export default function RootLayout({
     </html>
   );
 }
-
