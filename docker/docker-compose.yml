@@ -1,0 +1,14 @@
+services:
+  pha-changelog-frontend:
+    image: pha-changelog-frontend:local
+    build:
+      context: "${CHANGELOG_BUILD_CONTEXT:?Set CHANGELOG_BUILD_CONTEXT}"
+      dockerfile: "${CHANGELOG_DOCKERFILE:-Dockerfile}"
+      args:
+        BUILD_GIT_SHA: "${BUILD_GIT_SHA:-unknown}"
+    ports:
+      - "${CHANGELOG_PORT:?Set CHANGELOG_PORT}:3000"
+    environment:
+      NODE_ENV: production
+      NEXT_TELEMETRY_DISABLED: "1"
+    restart: unless-stopped
