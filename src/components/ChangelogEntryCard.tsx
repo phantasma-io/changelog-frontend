@@ -1,6 +1,6 @@
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { CalendarDays, LinkIcon } from "lucide-react";
+import { AlertTriangle, CalendarDays, LinkIcon } from "lucide-react";
 import type { ChangelogEntry } from "@/lib/changelog";
 import { TagBadge } from "@/components/TagBadge";
 
@@ -44,6 +44,27 @@ export function ChangelogEntryCard({
             </p>
           ) : null}
         </div>
+
+        {entry.notice ? (
+          <div
+            className="relative overflow-hidden rounded-[1.5rem] border px-4 py-4 shadow-[0_24px_70px_-42px_rgba(243,156,74,0.85)] backdrop-blur sm:px-5"
+            style={{
+              borderColor: "rgba(243, 156, 74, 0.34)",
+              backgroundColor: "rgba(243, 156, 74, 0.12)",
+            }}
+          >
+            <div className="absolute inset-y-0 left-0 w-1.5 bg-[rgb(243,156,74)]" />
+            <div className="pl-3">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(243,156,74,0.34)] bg-[rgba(243,156,74,0.16)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[rgb(255,224,189)]">
+                <AlertTriangle className="h-3.5 w-3.5" />
+                Important
+              </div>
+              <p className="mt-3 whitespace-pre-line text-[15px] font-medium leading-7 text-foreground sm:text-base">
+                {entry.notice}
+              </p>
+            </div>
+          </div>
+        ) : null}
 
         <div className="h-px bg-border/70" />
 

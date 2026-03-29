@@ -12,6 +12,7 @@ type ChangelogFrontmatter = {
   publishedAt?: string;
   tags?: string[];
   summary?: string;
+  notice?: string;
 };
 
 export type ChangelogEntry = {
@@ -21,6 +22,7 @@ export type ChangelogEntry = {
   dateLabel: string;
   tags: string[];
   summary?: string;
+  notice?: string;
   content: string;
 };
 
@@ -95,6 +97,10 @@ function parseEntryFile(fileName: string, fileContents: string): ChangelogEntry 
     summary:
       typeof frontmatter.summary === "string" && frontmatter.summary.trim()
         ? frontmatter.summary.trim()
+        : undefined,
+    notice:
+      typeof frontmatter.notice === "string" && frontmatter.notice.trim()
+        ? frontmatter.notice.trim()
         : undefined,
     content: content.trim(),
   };

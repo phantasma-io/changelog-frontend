@@ -4,6 +4,7 @@ publishedAt: 2026-03-27T12:00:00Z
 tags:
   - devnet
 summary: Deterministic NFT ids, restored contract and token lifecycle hooks, public RPC fixes, and more reliable validator sync.
+notice: "Devnet network has been rolled back to the March 16 state at block #6502683."
 ---
 
 - Added deterministic Phantasma-compatible NFT minting for the standard VM mint path: the chain now generates stable 256-bit _i ids from the public NFT payload and rejects duplicate deterministic replays.

@@ -20,6 +20,14 @@ describe("changelog content loader", () => {
     expect(entries[1]?.tags).toEqual(["devnet"]);
   });
 
+  it("exposes optional notice text from frontmatter", async () => {
+    // Optional callout text should be available separately from the markdown body.
+    const entries = await getAllChangelogEntries();
+
+    expect(entries[0]?.notice).toBe("The network has been rolled back to the March 16 state at block #6502683.");
+    expect(entries[1]?.notice).toBeUndefined();
+  });
+
   it("paginates content without relying on filename order", async () => {
     // Pagination should return the same newest entry as the sorted collection on page 1.
     const page = await getChangelogPage(1, 1);
