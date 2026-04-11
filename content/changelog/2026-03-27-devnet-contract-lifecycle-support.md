@@ -3,6 +3,7 @@ title: Contract lifecycle support
 publishedAt: 2026-03-27T12:00:00Z
 tags:
   - devnet
+  - validators
 summary: Deterministic NFT ids, restored contract and token lifecycle hooks, public RPC fixes, and more reliable validator sync.
 notice: "Devnet network has been rolled back to the March 16 state at block #6502683."
 ---

@@ -3,6 +3,7 @@ title: Restored Gen2 VM parity and interops
 publishedAt: 2026-03-17T12:00:00Z
 tags:
   - devnet
+  - validators
 summary: Gen2 VM parity fixes, restored storage/state interops, NFT lifecycle recovery, and imported-state repair work.
 ---
 
@@ -15,4 +16,3 @@ summary: Gen2 VM parity fixes, restored storage/state interops, NFT lifecycle re
 - Added governance repair resolutions for missing series and mint counts, imported token-contract fungible balances, imported market NFTs, and imported NFT infusions.
 - Restored Market royalty execution for imported series, added governance-controlled early cancellation, and fixed Token.GetBalances plus system-address transfer semantics.
 - Remaining gap: full trigger/runtime parity is still incomplete, and Runtime.MintTokens is still unsupported.
-

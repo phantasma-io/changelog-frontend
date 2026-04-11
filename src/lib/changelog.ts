@@ -6,6 +6,11 @@ import { cache } from "react";
 export const CHANGELOG_PAGE_SIZE = 5;
 
 const contentDirectory = path.join(process.cwd(), "content", "changelog");
+const networkTagRank = new Map<string, number>([
+  ["mainnet", 0],
+  ["devnet", 1],
+  ["testnet", 2],
+]);
 
 type ChangelogFrontmatter = {
   title?: string;
@@ -51,7 +56,7 @@ function normalizePublishedAt(value: unknown, fileName: string): string {
   return assertString(value, "publishedAt", fileName);
 }
 
-function normalizeTags(value: unknown, fileName: string): string[] {
+export function normalizeChangelogTags(value: unknown, fileName: string): string[] {
   if (value === undefined) {
     return [];
   }
@@ -60,12 +65,27 @@ function normalizeTags(value: unknown, fileName: string): string[] {
     throw new Error(`Invalid 'tags' value in ${fileName}: expected an array of strings`);
   }
 
-  return value.map((tag, index) => {
-    if (typeof tag !== "string" || !tag.trim()) {
-      throw new Error(`Invalid 'tags[${index}]' value in ${fileName}`);
-    }
-    return tag.trim().toLowerCase();
-  });
+  return value
+    .map((tag, index) => {
+      if (typeof tag !== "string" || !tag.trim()) {
+        throw new Error(`Invalid 'tags[${index}]' value in ${fileName}`);
+      }
+      return {
+        index,
+        tag: tag.trim().toLowerCase(),
+      };
+    })
+    .sort((left, right) => {
+      const leftRank = networkTagRank.get(left.tag);
+      const rightRank = networkTagRank.get(right.tag);
+
+      if (leftRank !== undefined || rightRank !== undefined) {
+        return (leftRank ?? Number.POSITIVE_INFINITY) - (rightRank ?? Number.POSITIVE_INFINITY);
+      }
+
+      return left.index - right.index;
+    })
+    .map(({ tag }) => tag);
 }
 
 function formatPublishedDate(isoDate: string): string {
@@ -93,7 +113,7 @@ function parseEntryFile(fileName: string, fileContents: string): ChangelogEntry 
     title,
     publishedAt,
     dateLabel: formatPublishedDate(publishedAt),
-    tags: normalizeTags(frontmatter.tags, fileName),
+    tags: normalizeChangelogTags(frontmatter.tags, fileName),
     summary:
       typeof frontmatter.summary === "string" && frontmatter.summary.trim()
         ? frontmatter.summary.trim()

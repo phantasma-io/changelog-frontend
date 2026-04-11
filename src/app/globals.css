@@ -197,6 +197,10 @@
     @apply bg-transparent p-0 text-inherit;
   }
 
+  .changelog-markdown hr {
+    @apply my-6 border-0 border-t border-border/70;
+  }
+
   .changelog-markdown blockquote {
     @apply border-l-2 pl-4 text-muted-foreground;
     border-color: rgb(var(--brand-cyan) / 0.45);

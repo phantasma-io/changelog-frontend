@@ -1,7 +1,6 @@
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import { AlertTriangle, CalendarDays, LinkIcon } from "lucide-react";
 import type { ChangelogEntry } from "@/lib/changelog";
+import { MarkdownWithCopy } from "@/components/MarkdownWithCopy";
 import { TagBadge } from "@/components/TagBadge";
 
 export function ChangelogEntryCard({
@@ -69,7 +68,7 @@ export function ChangelogEntryCard({
         <div className="h-px bg-border/70" />
 
         <div className="changelog-markdown">
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>{entry.content}</ReactMarkdown>
+          <MarkdownWithCopy content={entry.content} />
         </div>
       </div>
     </article>

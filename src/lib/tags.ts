@@ -1,5 +1,3 @@
-type TagKey = "mainnet" | "testnet" | "devnet" | "localnet" | "custom";
-
 type TagPalette = {
   label: string;
   text: string;
@@ -7,14 +5,25 @@ type TagPalette = {
   border: string;
 };
 
-const baseTagColors: Record<TagKey, string> = {
+const baseTagColors = {
   // `mainnet` is not explicit in PoltergeistLite; the wallet falls back to AccentPrimary.
   mainnet: "#6baee6",
-  testnet: "#f39c4a",
   devnet: "#b175f6",
+  testnet: "#f39c4a",
+  validators: "#2fbf71",
+  rpc: "#2bb3a3",
+  sdk: "#d95f8f",
+  tooling: "#c9a227",
+  frontend: "#7c8cff",
+  wallet: "#4caf6d",
+  docs: "#9aa4b2",
   localnet: "#4caf6d",
   custom: "#c84a4a",
-};
+} as const;
+
+type TagKey = keyof typeof baseTagColors;
+
+const fallbackTagColor = "#8a97a8";
 
 function normalizeHex(hex: string): string {
   const value = hex.trim().replace("#", "");
@@ -48,8 +57,10 @@ function mixColor(baseHex: string, targetHex: string, ratio: number): string {
 }
 
 export function getTagPalette(tag: string): TagPalette {
-  const normalized = tag.trim().toLowerCase() as TagKey;
-  const baseColor = baseTagColors[normalized] ?? baseTagColors.mainnet;
+  const normalized = tag.trim().toLowerCase();
+  const baseColor = Object.prototype.hasOwnProperty.call(baseTagColors, normalized)
+    ? baseTagColors[normalized as TagKey]
+    : fallbackTagColor;
 
   return {
     label: normalized.toUpperCase(),
@@ -58,4 +69,3 @@ export function getTagPalette(tag: string): TagPalette {
     border: mixColor(baseColor, "#ffffff", 0.2),
   };
 }
-
