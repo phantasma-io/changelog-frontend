@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { ChangelogPage } from "@/lib/changelog";
 import { ChangelogEntryCard } from "@/components/ChangelogEntryCard";
 import { Pagination } from "@/components/Pagination";
@@ -16,7 +17,14 @@ export function ChangelogPageShell({ page }: { page: ChangelogPage }) {
                 Phantasma Network
               </div>
 
-              <h1 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">Changelog</h1>
+              <h1 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
+                <Link
+                  href="/"
+                  className="inline-block rounded-lg transition hover:text-[rgb(var(--brand-cyan))] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgb(var(--brand-cyan))]"
+                >
+                  Changelog
+                </Link>
+              </h1>
             </div>
 
             <div className="flex flex-wrap items-center gap-3">
