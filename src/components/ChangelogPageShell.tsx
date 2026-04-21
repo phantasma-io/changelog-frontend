@@ -1,8 +1,8 @@
-import Link from "next/link";
-import type { ChangelogPage } from "@/lib/changelog";
 import { ChangelogEntryCard } from "@/components/ChangelogEntryCard";
+import { ChangelogHomeLink } from "@/components/ChangelogHomeLink";
 import { Pagination } from "@/components/Pagination";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import type { ChangelogPage } from "@/lib/changelog";
 
 export function ChangelogPageShell({ page }: { page: ChangelogPage }) {
   return (
@@ -18,12 +18,7 @@ export function ChangelogPageShell({ page }: { page: ChangelogPage }) {
               </div>
 
               <h1 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
-                <Link
-                  href="/"
-                  className="inline-block rounded-lg transition hover:text-[rgb(var(--brand-cyan))] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgb(var(--brand-cyan))]"
-                >
-                  Changelog
-                </Link>
+                <ChangelogHomeLink />
               </h1>
             </div>
 
