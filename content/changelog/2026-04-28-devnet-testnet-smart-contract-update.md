@@ -7,6 +7,7 @@ tags:
   - validators
   - tooling
 summary: Devnet and testnet are running updated validator builds with token-state repairs, testnet smart contract execution, and matching TOMB compiler support for Runtime.WriteToken.
+notice: "Devnet and testnet have been reset to mainnet data at block #8782151. Both networks now start from that mainnet chain state and will diverge as new devnet and testnet transactions are produced."
 ---
 
 - Devnet and testnet are now running the updated validator build.
