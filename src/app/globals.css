@@ -151,6 +151,22 @@
     color: rgb(var(--brand-slate));
   }
 
+  .tag-badge {
+    border-color: rgb(var(--tag-rgb) / 0.36);
+    background-color: rgb(var(--tag-rgb) / 0.12);
+    color: var(--tag-light-text);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.16);
+  }
+
+  .dark .tag-badge {
+    border-color: rgb(var(--tag-rgb) / 0.42);
+    background-color: rgb(var(--tag-rgb) / 0.18);
+    color: var(--tag-dark-text);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.06),
+      0 10px 30px -24px rgb(var(--tag-rgb) / 0.75);
+  }
+
   .changelog-markdown {
     @apply text-sm leading-7 text-foreground/95 sm:text-[0.97rem];
   }

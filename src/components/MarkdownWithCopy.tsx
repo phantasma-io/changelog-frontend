@@ -66,7 +66,7 @@ function CopyablePre({ children }: React.ComponentProps<"pre">) {
         {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
         <span>{copied ? "Copied" : "Copy"}</span>
       </button>
-      <pre className="pr-24">{children}</pre>
+      <pre className="pt-14 pr-24 sm:pt-4">{children}</pre>
     </div>
   );
 }
