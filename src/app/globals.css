@@ -142,6 +142,108 @@
     @apply border border-border/70 bg-card/85 shadow-[0_18px_60px_-40px_rgba(0,0,0,0.35)] backdrop-blur;
   }
 
+  .countdown-panel {
+    @apply relative flex h-12 w-full justify-center md:w-auto md:justify-self-center;
+  }
+
+  .countdown-grid {
+    @apply grid grid-cols-4 gap-1.5 sm:gap-2;
+  }
+
+  .countdown-unit {
+    @apply flex h-12 min-w-14 flex-col items-center justify-center rounded-xl border border-border/70 bg-card/70 px-2 shadow-sm backdrop-blur;
+  }
+
+  .dark .countdown-unit {
+    @apply bg-card/55;
+  }
+
+  .countdown-value {
+    @apply font-mono text-xl font-semibold leading-none text-foreground tabular-nums sm:text-2xl;
+  }
+
+  .dark .countdown-value {
+    @apply text-white;
+  }
+
+  .countdown-label {
+    @apply mt-1 text-[8px] font-semibold uppercase leading-none text-muted-foreground;
+  }
+
+  .countdown-live {
+    @apply relative flex h-12 min-w-56 items-center justify-center overflow-hidden rounded-xl border border-border/70 bg-card/70 px-6 font-mono text-2xl font-semibold uppercase leading-none text-white shadow-sm backdrop-blur;
+    border-color: rgb(var(--brand-red) / 0.28);
+    background:
+      radial-gradient(circle at 50% 0%, rgb(var(--brand-cyan) / 0.14), transparent 70%),
+      linear-gradient(135deg, rgb(var(--brand-red) / 0.18), rgb(var(--brand-violet) / 0.12));
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.08),
+      0 0 24px -18px rgb(var(--brand-red) / 0.72),
+      0 0 36px -30px rgb(var(--brand-cyan) / 0.72);
+  }
+
+  .countdown-live::before {
+    @apply pointer-events-none absolute inset-y-0 w-14 -skew-x-12;
+    content: "";
+    left: -40%;
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.16), transparent);
+    opacity: 0;
+  }
+
+  .countdown-panel[data-live-fresh="true"] .countdown-live {
+    animation: countdown-live-glow 2.2s ease-in-out infinite alternate;
+  }
+
+  .countdown-panel[data-live-fresh="true"] .countdown-live::before {
+    animation: countdown-live-sweep 4.8s ease-in-out infinite;
+  }
+
+  .countdown-live::after {
+    @apply pointer-events-none absolute inset-x-8 bottom-0 h-px;
+    content: "";
+    background: linear-gradient(90deg, transparent, rgb(var(--brand-cyan) / 0.5), transparent);
+  }
+
+  @keyframes countdown-live-glow {
+    from {
+      box-shadow:
+        inset 0 1px 0 rgb(255 255 255 / 0.1),
+        0 0 20px -18px rgb(var(--brand-red) / 0.62),
+        0 0 30px -28px rgb(var(--brand-cyan) / 0.62);
+    }
+
+    to {
+      box-shadow:
+        inset 0 1px 0 rgb(255 255 255 / 0.11),
+        0 0 28px -16px rgb(var(--brand-red) / 0.82),
+        0 0 44px -27px rgb(var(--brand-cyan) / 0.82);
+    }
+  }
+
+  @keyframes countdown-live-sweep {
+    0% {
+      transform: translateX(0) skewX(-12deg);
+      opacity: 0;
+    }
+
+    28% {
+      opacity: 1;
+    }
+
+    68%,
+    100% {
+      transform: translateX(22rem) skewX(-12deg);
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .countdown-live,
+    .countdown-live::before {
+      animation: none;
+    }
+  }
+
   .brand-link {
     color: rgb(var(--brand-cyan));
     transition: color 0.2s ease;
