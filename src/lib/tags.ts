@@ -9,6 +9,7 @@ const baseTagColors = {
   mainnet: "#6f95b9",
   devnet: "#8d78b3",
   testnet: "#bd824d",
+  explorer: "#6f8fab",
   validators: "#5e9b78",
   rpc: "#4f9da0",
   sdk: "#7f9fc9",

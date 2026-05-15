@@ -4,7 +4,7 @@ publishedAt: 2026-05-15T03:53:06Z
 tags:
   - devnet
   - testnet
-  - frontend
+  - explorer
 summary: Devnet and testnet explorers now show rejected transaction candidates on transaction pages, making failed submissions easier to inspect.
 ---
 
