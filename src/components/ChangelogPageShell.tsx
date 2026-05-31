@@ -5,14 +5,20 @@ import { Pagination } from "@/components/Pagination";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import type { ChangelogPage } from "@/lib/changelog";
 
+const SHOW_HEADER_COUNTDOWN = false;
+
 export function ChangelogPageShell({ page }: { page: ChangelogPage }) {
+  const headerGridClassName = SHOW_HEADER_COUNTDOWN
+    ? "relative grid gap-5 md:grid-cols-[1fr_auto_1fr] md:items-center"
+    : "relative grid gap-5 md:grid-cols-[1fr_auto] md:items-center";
+
   return (
     <div className="min-h-screen">
       <div className="mx-auto flex w-full max-w-4xl flex-col gap-6 px-4 py-8 sm:px-6 sm:py-10">
         <header className="glass-panel relative overflow-hidden rounded-[2rem] p-6 sm:p-8">
           <div className="absolute -right-10 top-0 h-28 w-28 rounded-full bg-[rgb(var(--brand-violet)/0.14)] blur-3xl" />
 
-          <div className="relative grid gap-5 md:grid-cols-[1fr_auto_1fr] md:items-center">
+          <div className={headerGridClassName}>
             <div className="min-w-0">
               <div className="text-xs font-semibold uppercase tracking-[0.3em] text-foreground/85 dark:text-white">
                 Phantasma Network
@@ -23,7 +29,7 @@ export function ChangelogPageShell({ page }: { page: ChangelogPage }) {
               </h1>
             </div>
 
-            <HeaderCountdown />
+            {SHOW_HEADER_COUNTDOWN ? <HeaderCountdown /> : null}
 
             <div className="flex flex-wrap items-center gap-3 md:justify-end">
               {page.totalPages > 1 ? (
