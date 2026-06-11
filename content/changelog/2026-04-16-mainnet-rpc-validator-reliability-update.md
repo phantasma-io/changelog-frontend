@@ -8,7 +8,7 @@ tags:
 summary: Mainnet is running updated RPC and validator builds with safer ION connection recovery, cleaner API logging, special-resolution leader reelection, and contract-activation groundwork.
 ---
 
-- Phantasma RPC now recovers stale ION producer connections more safely, including a fix for connections that start closing while background send/read work is still unwinding.
+- RPC now recovers stale ION producer connections more safely, including a fix for connections that start closing while background send/read work is still unwinding.
 - JSON-RPC response `id` values are preserved from incoming requests, including integer ids, string ids, null ids, and omitted ids.
 - Expected empty-result reads and explicit client bad requests are separated from real RPC failures in logs, reducing error noise from normal account, block, token, NFT, transaction, and cache-miss paths.
 - `GetBlockByHash` now returns HTTP 200 for a valid lookup that has no matching block instead of treating that miss as an API error.

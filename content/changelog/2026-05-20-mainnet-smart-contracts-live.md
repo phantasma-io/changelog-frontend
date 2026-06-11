@@ -17,7 +17,7 @@ summary: Smart contract deployment and execution are now active on Phantasma mai
 - The restored VM runtime includes the compatibility work needed by existing Phantasma contract patterns: BigInteger, VMObject, ScriptContext, contract storage, `Data.*`, `Map.*`, `List.*`, runtime getters, contract address resolution, and multi-result script execution.
 - Mainnet token-backed contract state needed by the VM has been repaired, including token metadata, token flags, ABI rows, and contract registry rows.
 - Validator runtime logging and lifecycle event payloads now make contract deploy, upgrade, and token creation activity easier to track.
-- Phantasma RPC event reconstruction has been updated for nested Token calls, token repair migrations, Token Notify events, and contract lifecycle activity. RPC access to smart contract reads and writes remains controlled by each RPC node's operator configuration.
+- RPC event reconstruction has been updated for nested Token calls, token repair migrations, Token Notify events, and contract lifecycle activity. RPC access to smart contract reads and writes remains controlled by each RPC node's operator configuration.
 - TOMB compiler support, `pha-deploy` contract lifecycle commands, and the token deployment UI have been updated around the launch.
 - Current SDK releases for TypeScript, Go, Python, Rust, and .NET support the mainnet contract path with current VM transaction builders, token and NFT flows, gas handling, and RPC behavior.
 - Developer documentation now covers the current smart contract stack, including SDK guides, VM transaction flows, token and NFT workflows, and storage/data escrow guidance.
