@@ -5,6 +5,8 @@ import React, { useState } from "react";
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 
+import { copyText } from "@/lib/clipboard";
+
 function extractText(node: React.ReactNode): string {
   if (typeof node === "string" || typeof node === "number") {
     return String(node);
@@ -31,31 +33,6 @@ function extractCodeClassName(node: React.ReactNode): string | undefined {
   }
 
   return undefined;
-}
-
-async function copyText(text: string): Promise<boolean> {
-  if (navigator.clipboard?.writeText) {
-    try {
-      await navigator.clipboard.writeText(text);
-      return true;
-    } catch {
-      // Fall back to the legacy path when browser permissions block Clipboard API.
-    }
-  }
-
-  const textArea = document.createElement("textarea");
-  textArea.value = text;
-  textArea.setAttribute("readonly", "");
-  textArea.style.position = "fixed";
-  textArea.style.left = "-9999px";
-  document.body.append(textArea);
-  textArea.select();
-
-  try {
-    return document.execCommand("copy");
-  } finally {
-    textArea.remove();
-  }
 }
 
 function CopyableCodeBlock({ children, code }: { children: React.ReactNode; code: string }) {

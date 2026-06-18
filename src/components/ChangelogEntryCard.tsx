@@ -1,6 +1,7 @@
-import { AlertTriangle, CalendarDays, LinkIcon } from "lucide-react";
+import { AlertTriangle, CalendarDays } from "lucide-react";
 import type { ChangelogEntry } from "@/lib/changelog";
 import { MarkdownWithCopy } from "@/components/MarkdownWithCopy";
+import { PermalinkButton } from "@/components/PermalinkButton";
 import { TagBadge } from "@/components/TagBadge";
 
 export function ChangelogEntryCard({
@@ -22,14 +23,7 @@ export function ChangelogEntryCard({
             ))}
           </div>
 
-          <a
-            href={`#${entry.slug}`}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border/70 bg-card/80 text-muted-foreground shadow-sm backdrop-blur transition hover:border-[rgb(var(--brand-cyan)/0.4)] hover:text-[rgb(var(--brand-cyan))]"
-            aria-label={`Permalink to ${entry.title}`}
-            title="Permalink"
-          >
-            <LinkIcon className="h-3.5 w-3.5" />
-          </a>
+          <PermalinkButton slug={entry.slug} title={entry.title} />
         </div>
 
         <div className="min-w-0">
