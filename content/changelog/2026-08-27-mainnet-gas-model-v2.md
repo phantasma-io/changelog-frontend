@@ -27,4 +27,4 @@ If your service sends script-based transfers, three numbers are worth checking. 
 
 ---
 
-[Mainnet Explorer](https://explorer.phantasma.info/) | [Activation block](https://explorer.phantasma.info/block/9075630)
+[Mainnet Explorer](https://explorer.phantasma.info/) | [Activation block](https://explorer.phantasma.info/block/9075629)
