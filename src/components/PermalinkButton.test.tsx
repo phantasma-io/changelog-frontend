@@ -3,13 +3,14 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { PermalinkButton } from "./PermalinkButton";
 
 describe("PermalinkButton", () => {
-  // It must remain a real anchor to the entry hash so native link behavior
-  // (keyboard, modified clicks, "copy link address") keeps working.
-  it("renders an anchor pointing at the entry hash", () => {
+  // It must remain a real anchor so native link behavior (keyboard, modified
+  // clicks, "copy link address") keeps working, and it must point at the entry's
+  // own page, which is the address that survives pagination.
+  it("renders an anchor pointing at the entry page", () => {
     render(<PermalinkButton slug="2026-06-18-example" title="Example" />);
 
     const link = screen.getByRole("link", { name: /copy permalink to example/i });
-    expect(link).toHaveAttribute("href", "#2026-06-18-example");
+    expect(link).toHaveAttribute("href", "/2026-06-18-example");
   });
 
   // A plain primary click copies the entry's absolute URL and surfaces feedback.
@@ -20,10 +21,10 @@ describe("PermalinkButton", () => {
     render(<PermalinkButton slug="2026-06-18-example" title="Example" />);
     fireEvent.click(screen.getByRole("link", { name: /copy permalink to example/i }));
 
-    // The copied value is the page's absolute URL (origin + path + hash), read
-    // from window.location so the test is not coupled to the jsdom base URL.
+    // The copied value is the entry's permanent absolute URL, read from
+    // window.location so the test is not coupled to the jsdom base URL.
     expect(await screen.findByTitle("Copied")).toBeInTheDocument();
-    expect(writeText).toHaveBeenCalledWith(`${window.location.origin}/#2026-06-18-example`);
+    expect(writeText).toHaveBeenCalledWith(`${window.location.origin}/2026-06-18-example`);
   });
 
   // Modified clicks (e.g. Ctrl/Cmd, open-in-new-tab) must fall through to the

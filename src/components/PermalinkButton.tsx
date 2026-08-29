@@ -7,11 +7,14 @@ import { copyText } from "@/lib/clipboard";
 
 // Permalink control for a changelog entry.
 //
-// Hybrid behavior (the common convention): it stays a real anchor to the entry's
-// hash, so semantics, keyboard focus, and modified clicks (open in a new tab,
-// "copy link address") keep working. A plain primary click additionally copies
-// the entry's ABSOLUTE URL to the clipboard and reflects it in the address bar,
-// because users expect a permalink icon to "copy the link", not only jump to it.
+// The link target is the entry's own page (`/<slug>`), which is the only address
+// that stays correct: the paginated list moves an entry from page to page as
+// newer ones are published, so a page-scoped hash link decays. It stays a real
+// anchor, so semantics, keyboard focus, and modified clicks (open in a new tab,
+// "copy link address") keep working. A plain primary click copies that absolute
+// URL instead of navigating, because users expect a permalink icon to "copy the
+// link". The entry card keeps its hash id, so links shared before this route
+// existed still resolve on the list pages.
 export function PermalinkButton({ slug, title }: { slug: string; title: string }) {
   const [copied, setCopied] = useState(false);
 
@@ -24,12 +27,8 @@ export function PermalinkButton({ slug, title }: { slug: string; title: string }
 
     event.preventDefault();
 
-    // Absolute URL to this entry on the current (possibly paginated) page.
-    const url = `${window.location.origin}${window.location.pathname}#${slug}`;
-
-    // Reflect the permalink in the address bar without the scroll jump a default
-    // hash navigation would cause.
-    window.history.replaceState(null, "", `#${slug}`);
+    // Absolute, permanent URL of this entry.
+    const url = `${window.location.origin}/${slug}`;
 
     if (await copyText(url)) {
       setCopied(true);
@@ -39,7 +38,7 @@ export function PermalinkButton({ slug, title }: { slug: string; title: string }
 
   return (
     <a
-      href={`#${slug}`}
+      href={`/${slug}`}
       onClick={handleClick}
       className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border/70 bg-card/80 text-muted-foreground shadow-sm backdrop-blur transition hover:border-[rgb(var(--brand-cyan)/0.4)] hover:text-[rgb(var(--brand-cyan))]"
       aria-label={copied ? `Permalink to ${title} copied` : `Copy permalink to ${title}`}
