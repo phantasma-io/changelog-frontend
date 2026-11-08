@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vitest";
+
 import {
   CHANGELOG_PAGE_SIZE,
   getAllChangelogEntries,
