@@ -20,10 +20,16 @@ test:
 build:
     npm run build
 
+# Export the whole site to out/.
+build-static:
+    STATIC_EXPORT=1 npm run build
+
 start:
     npm run start
 
+# build-static runs before build, so .next keeps the default build.
 verify:
     just lint
     just test
+    just build-static
     just build
